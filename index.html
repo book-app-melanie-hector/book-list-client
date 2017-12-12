@@ -2,9 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script id="error-template" type="text/x-handlebars-template">
+      <h1>{{error}}</h1>
+    </script>
     <title>Book App</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <section id="book-view" class="container">
+      <ul>
+      </ul>
+    </section>
+
+    <section class="error-view">
+    </section>
+
+    <section id="about" class="container">
+      <h1>About the app</h1>
+      <p>This is the app</p>
+    </section>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </html>
