@@ -1,14 +1,19 @@
 'use strict';
 
-let bookView = {};
+var app = app || {};
 
-let bookView.initIndexPage = () => {
-  $('.container').hide();
-  $('.book-view').show();
-  Book.all.map(author => {
-    return {
-      author: author,
-      title: title
+(function (module) {
+  const bookView = {};
+
+
+  bookView.initIndexPage = () => {
+    $('.container').hide();
+    $('.book-view').show();
+    module.Book.all.map(book => $('#book-list').appent(book.toHtml()));
     }
-  }).append(author.toHtml()); //this may need to be corrected
-}
+  module.bookView = bookView;
+}) (app)
+
+$(function() {
+  app.Book.fetchAll(app.bookView.initIndexPage);
+})
