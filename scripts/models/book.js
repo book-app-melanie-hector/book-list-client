@@ -31,5 +31,19 @@ var __API_URL__ = 'http://localhost:3000';
       .then(callback)
       .catch(errorCallBack);
   };
+
+  Book.fetchOne = callback => {
+    $.get(`${__API_URL__}/api/v1/books/:id`)
+      .then(data => Book.loadAll(data))
+      .then(callback)
+      .catch(errorCallBack);
+  }
+
+  Book.prototype.insertRecord = function(callback) {
+    $.post('/books/new', {title: this.title, author: this.author, image_url: this.image_url, isbn: this.isbn, description: this.description})
+      .then(console.log)
+      .then(callback);
+  }
+
   module.Book = Book;
 }) (app)
