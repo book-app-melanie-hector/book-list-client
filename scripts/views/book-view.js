@@ -15,9 +15,10 @@ var app = app || {};
   bookView.initDetailPage = () => {
     $('.container').hide();
     $('.detail-view').show();
+    app.Book.map(book => $('#book-details').append(book.toHtml()))
   }
 
-  bookView.initNewbookPage = () => {
+  bookView.initNewBookPage = () => {
     $('.container').hide();
     $('.new-book-form').show();
     $('#new-form').on('submit', bookView.submit);

@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Book App</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
     <script id="error-template" type="text/x-handlebars-template">
       <h3>Looks like something went wrong</h3>
       <p>{{status}}: {{statusText}}</p>
@@ -32,6 +37,15 @@
   </head>
   <body>
     <header>
+      <nav>
+         <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
+         <ul class="main">
+               <li><a href="">View all books</a></li>
+               <li><a href="">add a new book</a></li>
+               <li><a href="">about us</a></li>
+         </ul>
+         <label for="css-toggle-menu" id="css-toggle-menu"></label>
+       </nav>
     </header>
     <main>
       <section class="book-view container">
@@ -44,7 +58,7 @@
 
       <section class="detail-view container">
         <h2>Book Details</h2>
-        <ul></ul>
+        <ul id="book-details"></ul>
       </section>
 
       <section class="error-view container">
