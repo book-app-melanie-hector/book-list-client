@@ -1,0 +1,50 @@
+nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 1080px;
+	margin: 0 auto;
+   background: #999;
+}
+
+nav ul,
+nav li {
+	flex: 1;
+}
+
+nav li:last-child {
+   border-bottom: none;
+}
+
+nav a {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	font-size: 1.8rem;
+}
+
+nav li {
+	position: relative;
+	line-height: 50px;
+	color: #fff;
+	text-align: center;
+}
+
+nav input,
+nav label {
+	display: none;
+	width: 36px;
+	height: 36px;
+	background: #555;
+	color: #fff;
+	text-align: center;
+	line-height: 36px;
+	font-size: 1.6rem;
+	border-radius: 2px;
+}
+
+nav label {
+   position: absolute;
+   top: 8px;
+   right: 8px;
+   transition: .4s;
+}

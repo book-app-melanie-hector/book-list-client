@@ -12,7 +12,7 @@ var app = app || {};
     $('#error-message').empty();
 
     let template = Handlebars.compile($('#error-template').text());
-    $('error-message').append(template(err));
+    $('#error-message').append(template(err));
   };
 
   module.errorView = errorView;
