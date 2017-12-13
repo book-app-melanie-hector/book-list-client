@@ -1,8 +1,8 @@
 'use strict';
 //change to IIFE
 var app = app || {};
-var __API_URL__ = 'http://localhost:3000';
-// var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
+// var __API_URL__ = 'http://localhost:3000';
+var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
 
 (function (module) {
   function errorCallBack(err) {
