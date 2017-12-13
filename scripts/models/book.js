@@ -10,13 +10,13 @@ var __API_URL__ = 'http://localhost:3000';
   }
 
   function Book(obj) {
-    Object.keys(obj).forEach(key => this.[key] = obj[key]);
+    Object.keys(obj).forEach(key => this[key] = obj[key]);
   };
 
   Book.all=[];
 
   Book.prototype.toHtml = function() {
-    let template = Handlebars.compile($('book-list-template').text());
+    let template = Handlebars.compile($('#book-list-template').text());
     return template(this);
   };
 
@@ -25,7 +25,7 @@ var __API_URL__ = 'http://localhost:3000';
     Book.all = rows.map(bookObj => new Book(bookObj));
   };
 
-  Book.fetchAll = callBack => {
+  Book.fetchAll = callback => {
     $.get(`${__API_URL__}/api/v1/books`)
       .then(data => Book.loadAll(data))
       .then(callback)
