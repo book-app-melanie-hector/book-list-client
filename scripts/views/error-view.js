@@ -1,11 +1,19 @@
 'use strict';
+// turn into IIFE
 
-let errorView = {};
+var app = app || {};
 
-errorView.initErrorPage = err => {
-  $('.container').hide();
-  $('.error-view').show().replaceWith($('#error-message'));
+(function (module) {
+  const errorView = {};
 
-  let template = Handlebars.compile($('#error-template').text());
-  // .append(template(err)) ...not sure how to complete this
-}
+  errorView.initErrorPage = err => {
+    $('.container').hide();
+    $('.error-view').show();
+    $('#error-message').empty();
+
+    let template = Handlebars.compile($('#error-template').text());
+    $('error-message').append(template(err));
+  };
+
+  module.errorView = errorView;
+}) (app)

@@ -1,26 +1,35 @@
 'use strict';
+//change to IIFE
+var app = app || {};
+var __API_URL__ = 'http://localhost:3000';
 
-function Book(obj) {
-  Object.keys(obj).forEach(key => this.[key] = obj[key]);
-};
+(function (module) {
+  function errorCallBack(err) {
+    console.error(err);;
+    module.errorView.initErrorPage(err);
+  }
 
-let Book.all=[];
+  function Book(obj) {
+    Object.keys(obj).forEach(key => this[key] = obj[key]);
+  };
 
-let Book.toHtml = function() {
-  let template = Handlebars.compile($('book-list-template').text());
+  Book.all=[];
 
-  return template('this');
-};
+  Book.prototype.toHtml = function() {
+    let template = Handlebars.compile($('#book-list-template').text());
+    return template(this);
+  };
 
-let Book.loadAll = rows => {
-  rows.sort((a,b) => b.title - a.title);
-  Book.all = rows.map(bookObj => new Book(bookObj));
-};
+  Book.loadAll = rows => {
+    rows.sort((a,b) => b.title - a.title);
+    Book.all = rows.map(bookObj => new Book(bookObj));
+  };
 
-let Book.fetchAll = callBack => {
-  $.get('/api/v1/books')
-    .then(results => {
-      Book.loadAll(results);
-    })
-    .catch(error => errorCallBack(error));
-};
+  Book.fetchAll = callback => {
+    $.get(`${__API_URL__}/api/v1/books`)
+      .then(data => Book.loadAll(data))
+      .then(callback)
+      .catch(errorCallBack);
+  };
+  module.Book = Book;
+}) (app)
