@@ -21,6 +21,11 @@ var __API_URL__ = 'http://localhost:3000';
     return template(this);
   };
 
+  // Book.prototype.detailToHTML() = function() {
+  //   let template = Handlebars.compile($('#detail-view-template').text());
+  //   return template(this);
+  // }
+
   Book.loadAll = rows => {
     rows.sort((a,b) => b.title - a.title);
     Book.all = rows.map(bookObj => new Book(bookObj));

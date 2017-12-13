@@ -15,7 +15,7 @@ var app = app || {};
   bookView.initDetailPage = () => {
     $('.container').hide();
     $('.detail-view').show();
-    app.Book.map(book => $('#book-details').append(book.toHtml()))
+    app.Book.map(book => $('#book-details').append(book.detailToHtml())) //This needs to be done differently
   }
 
   bookView.initNewBookPage = () => {
