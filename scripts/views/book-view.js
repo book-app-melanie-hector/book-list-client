@@ -9,44 +9,58 @@ var app = app || {};
   bookView.initIndexPage = () => {
     $('.container').hide();
     $('.book-view').show();
+    $('#book-list').empty();
     app.Book.all.map(book => $('#book-list').append(book.toHtml()));
   };
 
-  bookView.initDetailPage = () => {
+  bookView.initDetailPage = (ctx) => {
     $('.container').hide();
     $('.detail-view').show();
-    app.Book.map(book => $('#book-details').append(book.detailToHtml())) //This needs to be done differently
+    $('#book-details').empty();
+    let template = Handlebars.compile($('#detail-view-template').text());
+    $('#book-details').append(template(ctx));
   }
+
 
   bookView.initNewBookPage = () => {
     $('.container').hide();
     $('.new-book-form').show();
-    $('#new-form').on('submit', bookView.submit);
-  }
-
-  bookView.create = () => {
-    $('#new-book').empty();
-
-    let book = new app.Book({
-      title: $('#book-title').val(),
-      author: $('#book-author').val(),
-      image_url: $('#book-image-url').val(),
-      isbn: $('#book-isbn').val(),
-      description: $('#book-description').val()
+    $('#new-form').on('submit', function(event) {
+      event.preventDefault();
+      let book =  {
+        title: event.target.title.value,
+        author: event.target.author.value,
+        isbn: event.target.isbn.value,
+        image_url: event.target.image_url.value,
+        description: event.target.description.value
+      }
     })
-    $('#new-book').append(book.toHtml());
+    app.Book.create(book);
   }
 
-  bookView.submit = event => {
-    event.preventDefault();
-    let book = new app.Book({
-      title: $('#book-title').val(),
-      author: $('#book-author').val(),
-      image_url: $('#book-image-url').val(),
-      isbn: $('#book-isbn').val(),
-      description: $('#book-description').val()
-    })
-  }
+  // bookView.create = () => {
+  //   $('#new-book').empty();
+  //
+  //   let book = new app.Book({
+  //     title: $('#book-title').val(),
+  //     author: $('#book-author').val(),
+  //     image_url: $('#book-image-url').val(),
+  //     isbn: $('#book-isbn').val(),
+  //     description: $('#book-description').val()
+  //   })
+  //   $('#new-book').append(book.toHtml());
+  // }
+
+  // bookView.submit = event => {
+  //   event.preventDefault();
+  //   let book = new app.Book({
+  //     title: $('#book-title').val(),
+  //     author: $('#book-author').val(),
+  //     image_url: $('#book-image-url').val(),
+  //     isbn: $('#book-isbn').val(),
+  //     description: $('#book-description').val()
+  //   })
+  // }
 
   module.bookView = bookView;
 }) (app)
