@@ -19,6 +19,9 @@ var app = app || {};
     $('#book-details').empty();
     let template = Handlebars.compile($('#detail-view-template').text());
     $('#book-details').append(template(ctx));
+    //add event listeners
+    $('#update').on('submit', bookView.initUpdateFormPage);
+    $('#delete').on('submit', app.Book.destroy);
   }
 
 
@@ -38,19 +41,6 @@ var app = app || {};
     //   })
     //   app.Book.create(book);
     // })
-  }
-
-  bookView.create = () => {
-    $('#new-book').empty();
-
-    let book = new app.Book({
-      title: $('#book-title').val(),
-      author: $('#book-author').val(),
-      image_url: $('#book-image-url').val(),
-      isbn: $('#book-isbn').val(),
-      description: $('#book-description').val()
-    })
-    $('#new-book').append(book.toHtml());
   }
 
   bookView.submit = event => {
@@ -86,6 +76,20 @@ var app = app || {};
       app.Book.update(book);
     })
   }
+
+  bookView.create = () => {
+    $('#new-book').empty();
+
+    let book = new app.Book({
+      title: $('#book-title').val(),
+      author: $('#book-author').val(),
+      image_url: $('#book-image-url').val(),
+      isbn: $('#book-isbn').val(),
+      description: $('#book-description').val()
+    })
+    $('#new-book').append(book.toHtml());
+  }
+
 
   module.bookView = bookView;
 }) (app)

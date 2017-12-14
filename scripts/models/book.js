@@ -1,8 +1,8 @@
 'use strict';
 //change to IIFE
 var app = app || {};
-var __API_URL__ = 'http://localhost:3000';
-// var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
+// var __API_URL__ = 'http://localhost:3000';
+var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
 
 (function (module) {
   function errorCallBack(err) {
@@ -57,17 +57,18 @@ var __API_URL__ = 'http://localhost:3000';
   // Deletes a specific book and communicates with server.js to delete from database
   Book.destroy = (ctx, callback) => {
     $.ajax({
-      url: `/books/${ctx.params.book_id}`,
+      url: `${__API_URL__}/api/v1/books/${ctx.book_id}`,
       method: 'DELETE'
     })
-      .then(console.log)
+      .then(console.log(204))
+      .then(() => page('/'))
       .then(callback);
   }
 
   // Updates a specific book to the database
   Book.update = (book, callback) => {
     $.ajax({
-      url: `/books/${book.book_id}`,
+      url: `${__API_URL__}/api/v1/books/${book.book_id}`,
       method: 'PUT',
       data: book
     })

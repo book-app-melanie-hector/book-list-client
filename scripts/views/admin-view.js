@@ -1,15 +1,20 @@
 'use strict';
 
-let adminView = {};
+var app = app || {};
 
-// Shows admin login
-adminView.initAdminPage = () => {
-  $('.container').hide();
-  $('.admin-view').show();
-}
+(function (module) {
+  let adminView = {};
 
-adminView.verify = () => {
-  if ('#passphrase').val() === 12345) {
-    $('.admin-only').show();
+  // Shows admin login
+  adminView.initAdminPage = () => {
+    $('.container').hide();
+    $('.admin-view').show();
   }
-}
+
+  adminView.verify = () => {
+    if ($('#passphrase').val() === 12345) {
+      $('.admin-only').show();
+    }
+  }
+  module.adminView = adminView;
+}) (app)
