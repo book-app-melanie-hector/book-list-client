@@ -65,14 +65,14 @@ var app = app || {};
     app.Book.create(book);
   }
 
-  bookView.initUpdateFormPage = (ctx) => { // this needs ctx to pre-populate form
+  bookView.initUpdateFormPage = () => { // this needs ctx to pre-populate form
     $('.container').hide();
     $('.update-form').show();
-    $('#book-title').val(ctx),
-    $('#book-author').val(ctx),
-    $('#book-image-url').val(ctx),
-    $('#book-isbn').val(ctx),
-    $('#book-description').val(ctx)
+    // $('#book-title').val(ctx),
+    // $('#book-author').val(ctx),
+    // $('#book-image-url').val(ctx),
+    // $('#book-isbn').val(ctx),
+    // $('#book-description').val(ctx)
 
     $('#update-form').on('submit', function(event) {
       event.preventDefault();
@@ -83,7 +83,7 @@ var app = app || {};
         isbn: $('#book-isbn').val(),
         description: $('#book-description').val()
       })
-      app.book.update(book);
+      app.Book.update(book);
     })
   }
 

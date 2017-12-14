@@ -32,6 +32,10 @@
           <p>{{author}}</p>
           <p>{{isbn}}</p>
           <p>{{description}}</p>
+          <section id="admin-view">
+            <button type="submit" id="update"><a href="/books/{{book_id}}/update"></a>Update</button>
+            <button type="submit" id="delete">Delete</button>
+          </section>
         </div>
     </script>
 
@@ -60,11 +64,6 @@
       <section class="detail-view container">
         <h2>Book Details</h2>
         <section id="book-details">
-        </section>
-
-        <section id="admin-view">
-          <button type="submit" id="update">Update</button>
-          <button type="submit" id="delete">Delete</button>
         </section>
       </section>
 
