@@ -63,7 +63,7 @@ var app = app || {};
       description: $('#book-description').val()
     })
     app.Book.create(book);
-    window.location = '../'
+    // window.location = '../'
   }
 
   module.bookView = bookView;

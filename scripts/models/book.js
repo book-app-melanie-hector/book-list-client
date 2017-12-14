@@ -46,7 +46,9 @@ var __API_URL__ = 'http://localhost:3000';
   }
 
   Book.create = book => {
+    console.log('create a new book')
     $.post(`${__API_URL__}/api/v1/books`, book)
+      .then(console.log)
       .then(() => page('/'))
       .catch(errorCallBack);
   }
