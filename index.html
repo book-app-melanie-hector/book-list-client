@@ -19,6 +19,7 @@
           <div class="book-overlay">
             <h3>{{title}}</h3>
             <p>{{author}}</p>
+            <p class="detail-button"><a href="/books/{{book_id}}">View Details</a></p>
           </div>
       </li>
     </script>
@@ -30,7 +31,7 @@
           <h3>{{title}}</h3>
           <p>{{author}}</p>
           <p>{{isbn}}</p>
-          <p>{{descriptrion}}</p>
+          <p>{{description}}</p>
         </div>
     </script>
 
@@ -40,9 +41,9 @@
       <nav>
          <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
          <ul class="main">
-               <li><a href="">View all books</a></li>
-               <li><a href="">add a new book</a></li>
-               <li><a href="">about us</a></li>
+               <li><a href="/">View All Books</a></li>
+               <li><a href="/books/new">Add a New Book</a></li>
+               <li><a href="/about">About Us</a></li>
          </ul>
          <label for="css-toggle-menu" id="css-toggle-menu"></label>
        </nav>
@@ -58,7 +59,7 @@
 
       <section class="detail-view container">
         <h2>Book Details</h2>
-        <ul id="book-details"></ul>
+        <section id="book-details"></section>
       </section>
 
       <section class="error-view container">
@@ -71,9 +72,9 @@
         <p>This is the app</p>
       </section>
 
-      <section id="new-book-form" class="tab-content">
+      <section id="new-book-form" class="new-book-form container">
         <h1>Add a Book</h1>
-        <form action="#" id="new-form">
+        <form id="new-form">
           <label>
             <input type="text" id="book-title" placeholder="Book title" required>
           </label>
@@ -101,6 +102,7 @@
     <script src="./scripts/models/book.js" type="text/javascript"></script>
     <script src="./scripts/views/book-view.js" type="text/javascript"></script>
     <script src="./scripts/views/error-view.js" type="text/javascript"></script>
+    <script src="./scripts/controller/routes.js" type="text/javascript"></script>
   </body>
 </html>
 
