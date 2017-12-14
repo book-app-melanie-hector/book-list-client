@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href=".">
     <title>Book App</title>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/icons.css">
@@ -32,7 +33,7 @@
           <p>{{author}}</p>
           <p>{{isbn}}</p>
           <p>{{description}}</p>
-          <section id="admin-view">
+          <section class="admin-only container">
             <button type="submit" id="update"><a href="/books/{{book_id}}/update"></a>Update</button>
             <button type="submit" id="delete">Delete</button>
           </section>
@@ -47,7 +48,7 @@
          <ul class="main">
                <li><a href="/">View All Books</a></li>
                <li><a href="/books/new">Add a New Book</a></li>
-               <li><a href="/about">About Us</a></li>
+               <li><a href="">About Us</a></li>
          </ul>
          <label for="css-toggle-menu" id="css-toggle-menu"></label>
        </nav>
@@ -96,10 +97,9 @@
           <button type="submit">Submit and return to the home page</button>
         </form>
       </section>
-      <section id="new-book" class="tab-content">
 
       <section id="update-form" class="update-form container">
-        <h1>Add a Book</h1>
+        <h1>Update a Book</h1>
         <form id="update-form">
           <label>
             <input type="text" id="book-title" placeholder="Book title" required>
@@ -116,10 +116,15 @@
           <textarea id="description" rows="8" cols="40" required></textarea>
           <button type="submit">Update</button>
         </form>
-
       </section>
-      <section id="new-book" class="tab-content">
 
+      <section id="new-book" class="tab-content">
+      </section>
+
+      <section class="admin-view container">
+        <form>
+          <input id="passphrase" type="number">
+        </form>
       </section>
 
     </main>
