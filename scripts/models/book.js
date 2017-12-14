@@ -6,13 +6,13 @@ var __API_URL__ = 'http://localhost:3000';
 
 (function (module) {
   function errorCallBack(err) {
-    console.error(err);;
+    console.error(err);
     module.errorView.initErrorPage(err);
   }
 
   function Book(obj) {
     Object.keys(obj).forEach(key => this[key] = obj[key]);
-  };
+  }
 
   Book.all=[];
 
