@@ -63,7 +63,28 @@ var app = app || {};
       description: $('#book-description').val()
     })
     app.Book.create(book);
-    // window.location = '../'
+  }
+
+  bookView.initUpdateFormPage = (ctx) => { // this needs ctx to pre-populate form
+    $('.container').hide();
+    $('.update-form').show();
+    $('#book-title').val(ctx),
+    $('#book-author').val(ctx),
+    $('#book-image-url').val(ctx),
+    $('#book-isbn').val(ctx),
+    $('#book-description').val(ctx)
+
+    $('#update-form').on('submit', function(event) {
+      event.preventDefault();
+      let book = new app.Book({
+        title: $('#book-title').val(),
+        author: $('#book-author').val(),
+        image_url: $('#book-image-url').val(),
+        isbn: $('#book-isbn').val(),
+        description: $('#book-description').val()
+      })
+      app.book.update(book);
+    })
   }
 
   module.bookView = bookView;

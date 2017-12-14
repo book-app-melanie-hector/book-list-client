@@ -59,7 +59,13 @@
 
       <section class="detail-view container">
         <h2>Book Details</h2>
-        <section id="book-details"></section>
+        <section id="book-details">
+        </section>
+
+        <section id="admin-view">
+          <button type="submit" id="update">Update</button>
+          <button type="submit" id="delete">Delete</button>
+        </section>
       </section>
 
       <section class="error-view container">
@@ -90,6 +96,28 @@
           <textarea id="description" rows="8" cols="40" required></textarea>
           <button type="submit">Submit and return to the home page</button>
         </form>
+      </section>
+      <section id="new-book" class="tab-content">
+
+      <section id="update-form" class="update-form container">
+        <h1>Add a Book</h1>
+        <form id="update-form">
+          <label>
+            <input type="text" id="book-title" placeholder="Book title" required>
+          </label>
+          <label>
+            <input type="text" id="book-author" placeholder="Author Name" required>
+          </label>
+          <label>
+            <input type="text" id="book-image-url" placeholder="Book Image URL" required>
+          </label>
+          <label>
+            <input type="text" id="book-isbn" placeholder="ISBN" required>
+          </label>
+          <textarea id="description" rows="8" cols="40" required></textarea>
+          <button type="submit">Update</button>
+        </form>
+
       </section>
       <section id="new-book" class="tab-content">
 
