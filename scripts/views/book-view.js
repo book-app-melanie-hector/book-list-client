@@ -21,14 +21,14 @@ var app = app || {};
     let template = Handlebars.compile($('#detail-view-template').text());
     $('#book-details').append(template(book.book));
 
-    $('#update').on('click', function (event) {
-      event.preventDefault();
-      app.Book.update(book);
+    $('#update').on('click', function () {
+      page(`/books/${$(this).data('id')}/update`)
+      // app.Book.update(book);
     });
 
-    $('#delete').on('click', function(event) {
-      event.preventDefault();
-      app.Book.destroy(book);
+    $('#delete').on('click', function() {
+      // event.preventDefault();
+      app.Book.destroy($(this).data('id'));
     });
     // next();
   }
