@@ -1,8 +1,8 @@
 'use strict';
 //change to IIFE
 var app = app || {};
-// var __API_URL__ = 'http://localhost:3000';
-var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
+var __API_URL__ = 'http://localhost:3000';
+// var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
 
 (function (module) {
   function errorCallBack(err) {
@@ -39,6 +39,7 @@ var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testin
 
   // Gets information from database for a specific book
   Book.fetchOne = (ctx, callback) => {
+    app.adminView.verify();
     $.get(`${__API_URL__}/api/v1/books/${ctx.params.book_id}`)
       .then(results => ctx.book = results[0])
       .then(callback)
@@ -55,25 +56,24 @@ var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testin
   }
 
   // Deletes a specific book and communicates with server.js to delete from database
-  Book.destroy = (ctx, callback) => {
+  Book.destroy = (ctx) => {
     $.ajax({
       url: `${__API_URL__}/api/v1/books/${ctx.book_id}`,
       method: 'DELETE'
     })
-      .then(console.log(204))
       .then(() => page('/'))
-      .then(callback);
+      .catch(errorCallBack);
   }
 
   // Updates a specific book to the database
-  Book.update = (book, callback) => {
+  Book.update = (book) => {
     $.ajax({
       url: `${__API_URL__}/api/v1/books/${book.book_id}`,
       method: 'PUT',
       data: book
     })
-      .then(console.log)
-      .then(callback);
+      .then(() => page(`/books/${book.book_id}`)) // redirect
+      .catch(errorCallBack); //catch
   }
 
   module.Book = Book;

@@ -26,16 +26,17 @@
     </script>
 
     <script id="detail-view-template" type="text/x-handlebars-template">
-      <li class="detail-items" data-bookid={{book_id}}>
+      <li class="detail-view" data-bookid={{book_id}}>
         <img src={{image_url}}>
         <div class="book-overlay">
           <h3>{{title}}</h3>
           <p>{{author}}</p>
           <p>{{isbn}}</p>
           <p>{{description}}</p>
-          <section class="admin-only container">
-            <button type="submit" id="update"><a href="/books/{{book_id}}/update"></a>Update</button>
-            <button type="submit" id="delete">Delete</button>
+          <div class="admin-view">
+            <button id="update" class="admin" data-id={{book_id}}><a href="/books/{{book_id}}/update">Update</button>
+            <button id="delete" class="admin" data-id={{book_id}}>Delete</button>
+          </div>
           </section>
         </div>
     </script>
@@ -48,7 +49,8 @@
          <ul class="main">
                <li><a href="/">View All Books</a></li>
                <li><a href="/books/new">Add a New Book</a></li>
-               <li><a href="">About Us</a></li>
+               <li><a href="/">About Us</a></li>
+               <li><a href="/admin">Admin</a></li>
          </ul>
          <label for="css-toggle-menu" id="css-toggle-menu"></label>
        </nav>
@@ -81,39 +83,23 @@
       <section id="new-book-form" class="new-book-form container">
         <h1>Add a Book</h1>
         <form id="new-form">
-          <label>
-            <input type="text" id="book-title" placeholder="Book title" required>
-          </label>
-          <label>
-            <input type="text" id="book-author" placeholder="Author Name" required>
-          </label>
-          <label>
-            <input type="text" id="book-image-url" placeholder="Book Image URL" required>
-          </label>
-          <label>
-            <input type="text" id="book-isbn" placeholder="ISBN" required>
-          </label>
-          <textarea id="description" rows="8" cols="40" required></textarea>
-          <button type="submit">Submit and return to the home page</button>
+          <input type="text" id="book-title" placeholder="Book title" required>
+          <input type="text" id="book-author" placeholder="Author Name" required>
+          <input type="text" id="book-imgage-url" placeholder="Book Image URL" required>
+          <input type="text" id="book-isbn" placeholder="ISBN" required>
+          <textarea name="book-description" rows="8" cols="40" required></textarea>
+          <button type="submit">Submit</button>
         </form>
       </section>
 
-      <section id="update-form" class="update-form container">
+      <section id="update-form" class="update-view container">
         <h1>Update a Book</h1>
         <form id="update-form">
-          <label>
-            <input type="text" id="book-title" placeholder="Book title" required>
-          </label>
-          <label>
-            <input type="text" id="book-author" placeholder="Author Name" required>
-          </label>
-          <label>
-            <input type="text" id="book-image-url" placeholder="Book Image URL" required>
-          </label>
-          <label>
-            <input type="text" id="book-isbn" placeholder="ISBN" required>
-          </label>
-          <textarea id="description" rows="8" cols="40" required></textarea>
+          <input type="text" id="update-title" name="title" placeholder="Book title" required>
+          <input type="text" id="update-title" name="author" placeholder="Author Name" required>
+          <input type="text" id="update-title" name="imgage_url" placeholder="Book Image URL" required>
+          <input type="text" id="update-title" name="isbn" placeholder="ISBN" required>
+          <textarea id="update-description" name="description" rows="8" cols="40" required></textarea>
           <button type="submit">Update</button>
         </form>
       </section>
@@ -122,13 +108,15 @@
       </section>
 
       <section class="admin-view container">
-        <form>
-          <input id="passphrase" type="number">
+        <h4>Enter Passphrase<h4>
+        <form id="admin-form">
+          <input name="passphrase" type="number">
+          <button type="submit">Log In</button>
         </form>
       </section>
 
     </main>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script src="./scripts/models/book.js" type="text/javascript"></script>
