@@ -56,9 +56,9 @@ var __API_URL__ = 'http://localhost:3000';
   }
 
   // Deletes a specific book and communicates with server.js to delete from database
-  Book.destroy = (ctx) => {
+  Book.destroy = (id) => {
     $.ajax({
-      url: `${__API_URL__}/api/v1/books/${ctx.book_id}`,
+      url: `${__API_URL__}/api/v1/books/${id}`,
       method: 'DELETE'
     })
       .then(() => page('/'))
