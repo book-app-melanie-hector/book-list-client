@@ -14,16 +14,19 @@ var app = app || {};
   };
 
   // Detailed view of selected book
-  bookView.initDetailPage = (book) => {
+  bookView.initDetailPage = (ctx) => {
     $('.container').hide();
     $('.detail-view').show();
     $('#book-details').empty();
     let template = Handlebars.compile($('#detail-view-template').text());
-    $('#book-details').append(template(book.book));
-
-    $('#update').on('click', function () {
-      page(`/books/${$(this).data('id')}/update`)
-      // app.Book.update(book);
+    $('#book-details').append(template(ctx.book));
+    // console.log(ctx)
+    let book = ctx.book;
+    console.log('detail view', book);
+    $('#update').on('click', book, () => {
+      bookView.initUpdateFormPage(book);
+      event.preventDefault();
+      // page(`/books/${$(this).data('id')}/update`)
     });
 
     $('#delete').on('click', function() {
@@ -57,13 +60,14 @@ var app = app || {};
   bookView.initUpdateFormPage = (ctx) => { // this needs ctx to pre-populate form
     $('.container').hide();
     $('.update-view').show();
-    $('#update-form input[name="title"]').val(ctx.book.title);
-    $('#update-form input[name="author"]').val(ctx.book.author);
-    $('#update-form input[name="image_url"]').val(ctx.book.image_url);
-    $('#update-form input[name="isbn"]').val(ctx.book.isbn);
-    $('#update-form textarea').val(ctx.book.description);
+    console.log('update ctx', ctx);
+    $('#update-form input[name="title"]').val(ctx.title);
+    $('#update-form input[name="author"]').val(ctx.author);
+    $('#update-form input[name="image_url"]').val(ctx.image_url);
+    $('#update-form input[name="isbn"]').val(ctx.isbn);
+    $('#update-form textarea[name="description"]').val(ctx.description);
 
-    $('#update-form').on('submit', function(event) {
+    $('#update-form').one('submit', ctx, function(event) {
       event.preventDefault();
 
       let book = new app.Book({
@@ -73,7 +77,8 @@ var app = app || {};
         isbn: event.target.isbn.value,
         image_url: event.target.image_url.value,
         description: event.target.description.value
-      })
+      });
+      // console.log(book);
       app.Book.update(book);
     })
   }
