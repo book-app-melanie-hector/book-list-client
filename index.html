@@ -40,10 +40,29 @@
           </section>
         </div>
     </script>
-
   </head>
+
   <body>
+
     <header>
+      <div class="bg-cover" class="none"></div>
+
+      <div class="prompt"><h1>Book App</h1></div>
+      <img src="https://i.imgur.com/b779c65.png" title="source: imgur.com" />
+      <a class="hamburger-shell">
+      <div class="hamb top"></div>
+      <div class="hamb middle"></div>
+      <div class="menu-name">MENU</div>
+
+       <ul id="menu">
+         <li><a href="/">View All Books</a></li>
+         <li><a href="/books/new">Add a New Book</a></li>
+         <li><a href="/">About Us</a></li>
+         <li><a href="/admin">Admin</a></li>
+         </ul>
+    </header>
+
+    <!-- <header>
       <nav>
          <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
          <ul class="main">
@@ -54,7 +73,8 @@
          </ul>
          <label for="css-toggle-menu" id="css-toggle-menu"></label>
        </nav>
-    </header>
+    </header> -->
+
     <main>
       <section class="book-view container">
         <h2 class="view-title">My Books</h2>
@@ -115,10 +135,22 @@
         </form>
       </section>
 
+      <section class="search-view container">
+        <input type="text" id="search-title" name="title" placeholder="Book title">
+        <input type="text" id="search-author" name="author" placeholder="Author Name">
+        <input type="text" id="search-isbn" name="isbn" placeholder="ISBN">
+      </section>
+
     </main>
+    <footer>
+      <div class="footer">
+      <small>&copy; Copyright 2017, Created with <style="font-size:50%">&hearts;</p> by Melanie Downing and Hector Norzagaray</small></div>
+    </footer>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+    <script src="./scripts/views/menu.js" type="text/javascript"></script>
     <script src="./scripts/models/book.js" type="text/javascript"></script>
     <script src="./scripts/views/book-view.js" type="text/javascript"></script>
     <script src="./scripts/views/error-view.js" type="text/javascript"></script>
