@@ -34,7 +34,7 @@
           <p>{{isbn}}</p>
           <p>{{description}}</p>
           <div class="admin-view">
-            <button id="update" class="admin" data-id={{book_id}}><a href="/books/{{book_id}}/update">Update</button>
+            <button id="update" class="admin" data-id={{book_id}}><a href="/books/{{book_id}}">Update</button>
             <button id="delete" class="admin" data-id={{book_id}}>Delete</button>
           </div>
           </section>
@@ -85,9 +85,9 @@
         <form id="new-form">
           <input type="text" id="book-title" placeholder="Book title" required>
           <input type="text" id="book-author" placeholder="Author Name" required>
-          <input type="text" id="book-imgage-url" placeholder="Book Image URL" required>
+          <input type="text" id="book-image-url" placeholder="Book Image URL" required>
           <input type="text" id="book-isbn" placeholder="ISBN" required>
-          <textarea name="book-description" rows="8" cols="40" required></textarea>
+          <textarea id="book-description" rows="8" cols="40" required></textarea>
           <button type="submit">Submit</button>
         </form>
       </section>
@@ -96,9 +96,9 @@
         <h1>Update a Book</h1>
         <form id="update-form">
           <input type="text" id="update-title" name="title" placeholder="Book title" required>
-          <input type="text" id="update-title" name="author" placeholder="Author Name" required>
-          <input type="text" id="update-title" name="imgage_url" placeholder="Book Image URL" required>
-          <input type="text" id="update-title" name="isbn" placeholder="ISBN" required>
+          <input type="text" id="update-author" name="author" placeholder="Author Name" required>
+          <input type="text" id="update-image_url" name="image_url" placeholder="Book Image URL" required>
+          <input type="text" id="update-isbn" name="isbn" placeholder="ISBN" required>
           <textarea id="update-description" name="description" rows="8" cols="40" required></textarea>
           <button type="submit">Update</button>
         </form>

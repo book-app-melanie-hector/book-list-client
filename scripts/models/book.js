@@ -1,8 +1,8 @@
 'use strict';
 //change to IIFE
 var app = app || {};
-// var __API_URL__ = 'http://localhost:3000';
-var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
+var __API_URL__ = 'http://localhost:3000';
+// var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
 
 (function (module) {
   function errorCallBack(err) {
@@ -39,6 +39,7 @@ var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testin
 
   // Gets information from database for a specific book
   Book.fetchOne = (ctx, callback) => {
+    console.log('ctx', ctx);
     app.adminView.verify();
     $.get(`${__API_URL__}/api/v1/books/${ctx.params.book_id}`)
       .then(results => ctx.book = results[0])
@@ -67,12 +68,20 @@ var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testin
 
   // Updates a specific book to the database
   Book.update = (book) => {
+    console.log('Book.update', book);
     $.ajax({
-      url: `${__API_URL__}/api/v1/books/${book.book_id}`,
+      url: `${__API_URL__}/api/v1/books/`,
       method: 'PUT',
-      data: book
+      data: {
+        book_id: book.book_id,
+        title: book.title,
+        author: book.author,
+        image_url: book.image_url,
+        isbn: book.isbn,
+        description: book.description
+      }
     })
-      .then(() => page(`/books/${book.book_id}`)) // redirect
+      .then(() => page('/')) // redirect
       .catch(errorCallBack); //catch
   }
 
