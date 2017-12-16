@@ -47,13 +47,13 @@ var app = app || {};
   // Submit event function to extract values from form and send to Book.create function
   bookView.submit = event => {
     event.preventDefault();
-    let book = new app.Book({
+    let book = {
       title: $('#book-title').val(),
       author: $('#book-author').val(),
       image_url: $('#book-image-url').val(),
       isbn: $('#book-isbn').val(),
       description: $('#book-description').val()
-    })
+    }
     app.Book.create(book);
   }
 
@@ -94,6 +94,37 @@ var app = app || {};
       description: $('#book-description').val()
     })
     $('#new-book').append(book.toHtml());
+  }
+
+  bookView.initSearchFormPage = function() {
+    $('.container').hide();
+    $('.search-view').show();
+    $('#search-form').on('submit', function(event) {
+      event.preventDefault();
+
+      let book = {
+        title: event.target.title.value || '',
+        author: event.target.author.value || '',
+        isbn: event.target.isbn.value || ''
+      };
+      console.log('', book);
+      app.Book.find(book, bookView.initSearchResultsPage);
+
+      event.target.title.value = '';
+      event.target.author.value = '';
+      event.target.isbn.value = '';
+    })
+  }
+
+  bookView.initSearchResultsPage = function() {
+    $('.container').hide();
+    $('.search-results').show();
+    $('#search-list').empty();
+    app.Book.all.map(book => $('#search-list').append(book.toHtml()));
+    $('.detail-button a').text('Add Book').attr('href', '/');
+    $('.detail-button').on('click', function (event) {
+      app.Book.findOne($(this).parent().parent().parent().data('bookid'))
+    })
   }
 
 

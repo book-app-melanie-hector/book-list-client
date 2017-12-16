@@ -57,6 +57,7 @@
        <ul id="menu">
          <li><a href="/">View All Books</a></li>
          <li><a href="/books/new">Add a New Book</a></li>
+         <li><a href="/books/search">Search for a Book</a></li>
          <li><a href="/">About Us</a></li>
          <li><a href="/admin">Admin</a></li>
          </ul>
@@ -136,9 +137,17 @@
       </section>
 
       <section class="search-view container">
-        <input type="text" id="search-title" name="title" placeholder="Book title">
-        <input type="text" id="search-author" name="author" placeholder="Author Name">
-        <input type="text" id="search-isbn" name="isbn" placeholder="ISBN">
+        <form id="search-form">
+          <input type="text" id="search-title" name="title" placeholder="Book title">
+          <input type="text" id="search-author" name="author" placeholder="Author Name">
+          <input type="text" id="search-isbn" name="isbn" placeholder="ISBN">
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <section class="search-results">
+        <ul id="search-list">
+        </ul>
       </section>
 
     </main>
