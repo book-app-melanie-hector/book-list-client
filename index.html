@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules/header.css">
+    <link rel="stylesheet" href="styles/modules/footer.css">
     <script id="error-template" type="text/x-handlebars-template">
       <h3>Looks like something went wrong</h3>
       <p>{{status}}: {{statusText}}</p>
@@ -20,7 +21,7 @@
           <div class="book-overlay">
             <h3>{{title}}</h3>
             <p>{{author}}</p>
-            <p class="detail-button"><a href="/books/{{book_id}}">View Details</a></p>
+            <button class="detail-button"><a href="/books/{{book_id}}">View Details</a></button>
           </div>
       </li>
     </script>
@@ -47,8 +48,10 @@
     <header>
       <div class="bg-cover" class="none"></div>
 
-      <div class="prompt"><h1>Book App</h1></div>
-      <img src="https://i.imgur.com/b779c65.png" title="source: imgur.com" />
+      <div class="prompt">
+        <img class="cf-logo" src="https://i.imgur.com/b779c65.png" title="source: imgur.com" />
+        <h1>Books App</h1>
+      </div>
       <a class="hamburger-shell">
       <div class="hamb top"></div>
       <div class="hamb middle"></div>
@@ -60,21 +63,8 @@
          <li><a href="/books/search">Search for a Book</a></li>
          <li><a href="/">About Us</a></li>
          <li><a href="/admin">Admin</a></li>
-         </ul>
+        </ul>
     </header>
-
-    <!-- <header>
-      <nav>
-         <input type="checkbox" id="css-toggle-menu" name="css-toggle-menu">
-         <ul class="main">
-               <li><a href="/">View All Books</a></li>
-               <li><a href="/books/new">Add a New Book</a></li>
-               <li><a href="/">About Us</a></li>
-               <li><a href="/admin">Admin</a></li>
-         </ul>
-         <label for="css-toggle-menu" id="css-toggle-menu"></label>
-       </nav>
-    </header> -->
 
     <main>
       <section class="book-view container">
@@ -102,25 +92,34 @@
       </section>
 
       <section id="new-book-form" class="new-book-form container">
-        <h1>Add a Book</h1>
+        <h2>Add a Book</h2>
+        <br>
         <form id="new-form">
-          <input type="text" id="book-title" placeholder="Book title" required>
-          <input type="text" id="book-author" placeholder="Author Name" required>
-          <input type="text" id="book-image-url" placeholder="Book Image URL" required>
-          <input type="text" id="book-isbn" placeholder="ISBN" required>
-          <textarea id="book-description" rows="8" cols="40" required></textarea>
+          <fieldset>
+            <input type="text" id="book-title" placeholder="Book title" required>
+            <input type="text" id="book-author" placeholder="Author Name" required>
+            <input type="text" id="book-image-url" placeholder="Book Image URL" required>
+            <input type="text" id="book-isbn" placeholder="ISBN" required>
+          </fieldset>
+          <fieldset>
+            <textarea id="book-description" rows="8" cols="40" placeholder="Description" required></textarea>
+          </fieldset>
           <button type="submit">Submit</button>
         </form>
       </section>
 
       <section id="update-form" class="update-view container">
-        <h1>Update a Book</h1>
+        <h2>Update a Book</h2>
         <form id="update-form">
-          <input type="text" id="update-title" name="title" placeholder="Book title" required>
-          <input type="text" id="update-author" name="author" placeholder="Author Name" required>
-          <input type="text" id="update-image_url" name="image_url" placeholder="Book Image URL" required>
-          <input type="text" id="update-isbn" name="isbn" placeholder="ISBN" required>
-          <textarea id="update-description" name="description" rows="8" cols="40" required></textarea>
+          <fieldset>
+            <input type="text" id="update-title" name="title" placeholder="Book title" required>
+            <input type="text" id="update-author" name="author" placeholder="Author Name" required>
+            <input type="text" id="update-image_url" name="image_url" placeholder="Book Image URL" required>
+            <input type="text" id="update-isbn" name="isbn" placeholder="ISBN" required>
+          </fieldset>
+          <fieldset>
+            <textarea id="update-description" name="description" rows="8" cols="40" required></textarea>
+          </fieldset>
           <button type="submit">Update</button>
         </form>
       </section>
@@ -138,14 +137,20 @@
 
       <section class="search-view container">
         <form id="search-form">
-          <input type="text" id="search-title" name="title" placeholder="Book title">
-          <input type="text" id="search-author" name="author" placeholder="Author Name">
-          <input type="text" id="search-isbn" name="isbn" placeholder="ISBN">
+          <h2>Search for a Book</h2>
+          <br>
+          <fieldset>
+            <input type="text" id="search-title" name="title" placeholder="Book title">
+            <input type="text" id="search-author" name="author" placeholder="Author Name">
+            <input type="text" id="search-isbn" name="isbn" placeholder="ISBN">
+          </fieldset>
           <button type="submit">Search</button>
         </form>
       </section>
 
-      <section class="search-results">
+      <section class="search-results container">
+        <h2>Search Results</h2>
+        <br>
         <ul id="search-list">
         </ul>
       </section>
