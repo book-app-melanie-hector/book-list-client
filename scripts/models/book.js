@@ -31,14 +31,13 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   // Load books into Book.all array, arrange by title name
   Book.loadAll = rows => {
-    rows.sort((a,b) => b.title - a.title);
-    Book.all = rows.map(bookObj => new Book(bookObj));
+    Book.all = rows.sort((a,b) => b.title - a.title).map(bookObj => new Book(bookObj));
   };
 
   // Gets books from database, then calls loadAll function
   Book.fetchAll = callback => {
     $.get(`${ENV.apiUrl}/api/v1/books`)
-      .then(data => Book.loadAll(data))
+      .then(Book.loadAll)
       .then(callback)
       .catch(errorCallBack);
   };
