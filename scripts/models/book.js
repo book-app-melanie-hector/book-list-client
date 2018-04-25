@@ -1,7 +1,13 @@
 'use strict';
 //change to IIFE
 var app = app || {};
-var __API_URL__ = 'http://localhost:3000';
+
+const ENV = {};
+ENV.isProduction = window.location.protocol === 'https:';
+ENV.productionApiUrl = 'https://md-hn-booklist.herokuapp.com/';
+ENV.developmentApiUrl = 'http://localhost:3000';
+ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
+// var __API_URL__ = 'http://localhost:3000';
 // var __API_URL__ = 'https://md-hn-booklist.herokuapp.com/';// for deployed testing
 
 (function (module) {
@@ -31,7 +37,7 @@ var __API_URL__ = 'http://localhost:3000';
 
   // Gets books from database, then calls loadAll function
   Book.fetchAll = callback => {
-    $.get(`${__API_URL__}/api/v1/books`)
+    $.get(`${ENV.apiUrl}/api/v1/books`)
       .then(data => Book.loadAll(data))
       .then(callback)
       .catch(errorCallBack);
@@ -39,9 +45,9 @@ var __API_URL__ = 'http://localhost:3000';
 
   // Gets information from database for a specific book
   Book.fetchOne = (ctx, callback) => {
-    console.log('ctx', ctx);
+    // console.log('ctx', ctx);
     app.adminView.verify();
-    $.get(`${__API_URL__}/api/v1/books/${ctx.params.book_id}`)
+    $.get(`${ENV.apiUrl}/api/v1/books/${ctx.params.book_id}`)
       .then(results => ctx.book = results[0])
       .then(callback)
       .catch(errorCallBack);
@@ -50,7 +56,7 @@ var __API_URL__ = 'http://localhost:3000';
   // Creates a new book in the database then brings the user back to the home page
   Book.create = book => {
     // console.log('create a new book')
-    $.post(`${__API_URL__}/api/v1/books`, book)
+    $.post(`${ENV.apiUrl}/api/v1/books`, book)
       .then(console.log)
       .then(() => page('/'))
       .catch(errorCallBack);
@@ -59,7 +65,7 @@ var __API_URL__ = 'http://localhost:3000';
   // Deletes a specific book and communicates with server.js to delete from database
   Book.destroy = (id) => {
     $.ajax({
-      url: `${__API_URL__}/api/v1/books/${id}`,
+      url: `${ENV.apiUrl}/api/v1/books/${id}`,
       method: 'DELETE'
     })
       .then(() => page('/'))
@@ -70,7 +76,7 @@ var __API_URL__ = 'http://localhost:3000';
   Book.update = (book) => {
     console.log('Book.update', book);
     $.ajax({
-      url: `${__API_URL__}/api/v1/books/`,
+      url: `${ENV.apiUrl}/api/v1/books/`,
       method: 'PUT',
       data: {
         book_id: book.book_id,
@@ -86,14 +92,14 @@ var __API_URL__ = 'http://localhost:3000';
   }
 
   Book.find = (book, callback) => {
-    $.get(`${__API_URL__}/api/v1/books/find`, book)
+    $.get(`${ENV.apiUrl}/api/v1/books/find`, book)
       .then(Book.loadAll)
       .then(callback)
       .catch(errorCallBack)
   };
 
   Book.findOne = isbn => {
-    $.get(`${__API_URL__}/api/v1/books/find/${isbn}`)
+    $.get(`${ENV.apiUrl}/api/v1/books/find/${isbn}`)
       .then(Book.create)
       .catch(errorCallBack)
   };
