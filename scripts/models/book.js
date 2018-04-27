@@ -72,21 +72,14 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   }
 
   // Updates a specific book to the database
-  Book.update = (book) => {
-    console.log('Book.update', book);
+  Book.update = (book, bookId) => {
+    // console.log('Book.update', book);
     $.ajax({
-      url: `${ENV.apiUrl}/api/v1/books/`,
+      url: `${ENV.apiUrl}/api/v1/books/${bookId}`,
       method: 'PUT',
-      data: {
-        book_id: book.book_id,
-        title: book.title,
-        author: book.author,
-        image_url: book.image_url,
-        isbn: book.isbn,
-        description: book.description
-      }
+      data: book,
     })
-      .then(() => page('/')) // redirect
+      .then(() => page(`/books/${bookId}`)) // redirect
       .catch(errorCallBack); //catch
   }
 
