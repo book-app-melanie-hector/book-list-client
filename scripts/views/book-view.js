@@ -21,12 +21,12 @@ var app = app || {};
     let template = Handlebars.compile($('#detail-view-template').text());
     $('#book-details').append(template(ctx.book));
     // console.log(ctx)
-    let book = ctx.book;
-    console.log('detail view', book);
-    $('#update').on('click', book, () => {
-      bookView.initUpdateFormPage(book);
-      event.preventDefault();
-      // page(`/books/${$(this).data('id')}/update`)
+    // let book = ctx.book;
+    // console.log('detail view', book);
+    $('#update').on('click', function() {
+      // bookView.initUpdateFormPage(book);
+      // event.preventDefault();
+      page(`/books/${$(this).data('id')}/update`)
     });
 
     $('#delete').on('click', function() {
@@ -60,7 +60,7 @@ var app = app || {};
   bookView.initUpdateFormPage = (ctx) => { // this needs ctx to pre-populate form
     $('.container').hide();
     $('.update-view').show();
-    console.log('update ctx', ctx);
+    // console.log('update ctx', ctx);
     $('#update-form input[name="title"]').val(ctx.title);
     $('#update-form input[name="author"]').val(ctx.author);
     $('#update-form input[name="image_url"]').val(ctx.image_url);
@@ -70,31 +70,31 @@ var app = app || {};
     $('#update-form').one('submit', ctx, function(event) {
       event.preventDefault();
 
-      let book = new app.Book({
-        book_id: ctx.book_id,
+      let book = {
+        book_id: ctx.book.book_id,
         title: event.target.title.value,
         author: event.target.author.value,
         isbn: event.target.isbn.value,
         image_url: event.target.image_url.value,
-        description: event.target.description.value
-      });
-      // console.log(book);
-      app.Book.update(book);
+        description: event.target.description.value,
+      };
+
+      module.Book.update(book, book.book_id);
     })
   }
 
-  bookView.create = () => {
-    $('#new-book').empty();
+  // bookView.create = () => {
+  //   $('#new-book').empty();
 
-    let book = new app.Book({
-      title: $('#book-title').val(),
-      author: $('#book-author').val(),
-      image_url: $('#book-image-url').val(),
-      isbn: $('#book-isbn').val(),
-      description: $('#book-description').val()
-    })
-    $('#new-book').append(book.toHtml());
-  }
+  //   let book = new app.Book({
+  //     title: $('#book-title').val(),
+  //     author: $('#book-author').val(),
+  //     image_url: $('#book-image-url').val(),
+  //     isbn: $('#book-isbn').val(),
+  //     description: $('#book-description').val()
+  //   })
+  //   $('#new-book').append(book.toHtml());
+  // }
 
   bookView.initSearchFormPage = function() {
     $('.container').hide();
@@ -105,10 +105,10 @@ var app = app || {};
       let book = {
         title: event.target.title.value || '',
         author: event.target.author.value || '',
-        isbn: event.target.isbn.value || ''
+        isbn: event.target.isbn.value || '',
       };
-      console.log('', book);
-      app.Book.find(book, bookView.initSearchResultsPage);
+
+      module.Book.find(book, bookView.initSearchResultsPage);
 
       event.target.title.value = '';
       event.target.author.value = '';
@@ -122,8 +122,8 @@ var app = app || {};
     $('#search-list').empty();
     app.Book.all.map(book => $('#search-list').append(book.toHtml()));
     $('.detail-button a').text('Add Book').attr('href', '/');
-    $('.detail-button').on('click', function (event) {
-      app.Book.findOne($(this).parent().parent().parent().data('bookid'))
+    $('.detail-button').on('click', function(event) {
+      app.Book.findOne($(this).parent().parent().data('bookid'))
     })
   }
 
@@ -131,6 +131,3 @@ var app = app || {};
   module.bookView = bookView;
 }) (app)
 
-// $(function() {
-//   app.Book.fetchAll(app.bookView.initIndexPage);
-// })
